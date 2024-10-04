@@ -7,7 +7,7 @@ import messages_en from './translations/en.json';
 
 const DEFAULT_CONFIG = {
   translations: [{ key: 'en', messages: messages_en }],
-  'core.LandingPage': LandingPage,
+  'core.PublicPage': LandingPage,
 };
 
 export const MoldovaLandingModule = (cfg) => ({ ...DEFAULT_CONFIG, ...cfg });

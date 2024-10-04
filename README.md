@@ -13,4 +13,4 @@ In development mode, you can use `yarn link` and `yarn start` to continuously sc
 
 ## Main Contribution
 
-__core.LandingPage__: This module serves as the Landing Page for the Moldova implementation. To enable its use, it must be exposed as a __core.LandingPage__ contribution point. Additionally, the database configuration variable __App.enableLandingPage__ must be set to **true**.
+**core.PublicPage**: This module serves as the Public Page for the Moldova implementation (Landing Page). To enable its use, it must be exposed as a **core.PublicPage** contribution point. Additionally, the database configuration variable **App.enablePublicPage** must be set to `true`.
