@@ -1,40 +1,46 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
-import { Button } from '@material-ui/core';
+import { Helmet } from '@openimis/fe-core';
+import AboutTheProgram from '../components/AboutTheProgram';
+import FAQSection from '../components/FAQSection';
+import Footer from '../components/Footer';
+import HeroSection from '../components/HeroSection';
+import HowToApplySection from '../components/HowToApplySection';
+import Navbar from '../components/Navbar';
+import ProgramSummary from '../components/ProgramSummary';
+import SiteBanner from '../components/SiteBanner';
 
-import {
-  Helmet,
-  useHistory,
-  useModulesManager,
-  useTranslations,
-} from '@openimis/fe-core';
-import { MODULE_NAME, ROUTES } from '../constants';
+/**
+ * @name LandingPage
+ * @param {boolean} props.isAuthenticated
+ * @param {string} props.logo
+ *
+ * @returns {React.Component}
+ *
+ * @description
+ * This is the Landing Page designed for the OpenIMIS Moldova project.
+ * It it available on the `/front` route if the user is not authenticated
+ * and the public page ("App.enablePublicPage") is enabled.
+ */
 
-function LandingPage() {
-  const modulesManager = useModulesManager();
-  const history = useHistory();
-  const { formatMessage } = useTranslations(MODULE_NAME, modulesManager);
+function LandingPage({ isAuthenticated, logo }) {
+  if (isAuthenticated) {
+    return <Redirect to="/home" />;
+  }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        height: '100vh',
-      }}
-    >
+    <>
       <Helmet title="Landing Page" />
-      <h1> There will be a Landing Page soon...</h1>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => history.push(ROUTES.LOGIN)}
-      >
-        {formatMessage('LoginButtonLabel')}
-      </Button>
-    </div>
+      <SiteBanner />
+      <Navbar logo={logo} />
+      <HeroSection />
+      <AboutTheProgram />
+      <HowToApplySection />
+      <FAQSection />
+      <ProgramSummary />
+      <Footer logo={logo} />
+    </>
   );
 }
 
