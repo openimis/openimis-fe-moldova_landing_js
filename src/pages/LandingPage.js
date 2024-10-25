@@ -2,11 +2,13 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import { Helmet } from '@openimis/fe-core';
+import AboutThePlatform from '../components/AboutThePlatform';
 import AboutTheProgram from '../components/AboutTheProgram';
+import Benefits from '../components/Benefits';
 import FAQSection from '../components/FAQSection';
 import Footer from '../components/Footer';
 import HeroSection from '../components/HeroSection';
-import HowToApplySection from '../components/HowToApplySection';
+import HowToPurchase from '../components/HowToPurchase';
 import Navbar from '../components/Navbar';
 import ProgramSummary from '../components/ProgramSummary';
 import SiteBanner from '../components/SiteBanner';
@@ -24,7 +26,7 @@ import SiteBanner from '../components/SiteBanner';
  * and the public page ("App.enablePublicPage") is enabled.
  */
 
-function LandingPage({ isAuthenticated, logo }) {
+function LandingPage({ isAuthenticated }) {
   if (isAuthenticated) {
     return <Redirect to="/home" />;
   }
@@ -33,13 +35,15 @@ function LandingPage({ isAuthenticated, logo }) {
     <>
       <Helmet title="Landing Page" />
       <SiteBanner />
-      <Navbar logo={logo} />
+      <Navbar />
       <HeroSection />
       <AboutTheProgram />
-      <HowToApplySection />
+      <Benefits />
+      <AboutThePlatform />
+      <HowToPurchase />
       <FAQSection />
       <ProgramSummary />
-      <Footer logo={logo} />
+      <Footer />
     </>
   );
 }

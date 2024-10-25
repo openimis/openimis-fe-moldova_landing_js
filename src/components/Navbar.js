@@ -1,80 +1,70 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+import { Link } from 'react-scroll';
 
-import {
-  AppBar, Button, Link, Typography,
-} from '@material-ui/core';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { AppBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import {
-  useHistory,
-  useModulesManager,
-  useTranslations,
-} from '@openimis/fe-core';
-import { LINKS, MODULE_NAME, ROUTES } from '../constants';
+import { useModulesManager, useTranslations } from '@openimis/fe-core';
+import logo from '../assets/logo.png';
+import { LINKS, MODULE_NAME } from '../constants';
 import SiteContainer from './SiteContainer';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    boxShadow: 'none',
+    height: '88px',
+    borderBottom: '1px solid #E0E0E0',
+  },
+  container: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    width: '126px',
+    height: '49px',
+  },
+  linksContainer: {
+    display: 'flex',
+    gap: '24px',
+  },
   bold: {
     fontWeight: 'bold',
   },
-  uppercase: {
-    textTransform: 'uppercase',
+  link: {
+    color: theme.landing.palette.primary,
+    fontSize: '16px',
+    lineHeight: '24px',
+    cursor: 'pointer',
   },
 }));
 
-function Navbar({ logo }) {
+function Navbar() {
   const classes = useStyles();
-  const history = useHistory();
   const modulesManager = useModulesManager();
   const { formatMessage } = useTranslations(MODULE_NAME, modulesManager);
-  const currentPath = history.location.pathname;
 
   return (
-    <AppBar
-      position="static"
-      color="transparent"
-      style={{
-        boxShadow: 'none',
-        height: '90px',
-        borderBottom: '1px solid #E0E0E0',
-      }}
-    >
-      <SiteContainer>
-        <img
-          src={logo}
-          alt="Logo of Ministry"
-          style={{ width: '170px', height: '90px' }}
-        />
-        <div style={{ display: 'flex', gap: '32px' }}>
+    <AppBar position="static" color="transparent" className={classes.appBar}>
+      <SiteContainer className={classes.container}>
+        <img src={logo} alt="Logo of Ministry" className={classes.logo} />
+        <div className={classes.linksContainer}>
           {LINKS.map((link) => (
             <Link
               key={link.name}
-              component="button"
-              variant="subtitle1"
-              className={`
-                ${currentPath === link.path ? classes.bold : ''}
-                ${classes.uppercase}
-              `}
-              onClick={() => history.push(link.path)}
+              to={link.path}
+              smooth
+              duration={500}
+              className={`${classes.link} ${classes.bold}`}
             >
               {formatMessage(link.name)}
             </Link>
           ))}
         </div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={() => history.push(ROUTES.LOGIN)}
-          style={{ padding: '8px 16px', borderRadius: '30px' }}
-          startIcon={<VpnKeyIcon />}
-        >
-          <Typography variant="body2" className={classes.uppercase}>
-            {formatMessage('LoginButtonLabel')}
-          </Typography>
-        </Button>
       </SiteContainer>
     </AppBar>
   );

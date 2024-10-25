@@ -4,24 +4,23 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/styles';
 
 import { useTranslations } from '@openimis/fe-core';
-import { MODULE_NAME } from '../constants';
+import { MODULE_NAME, REDIRECT } from '../constants';
 import SiteContainer from './SiteContainer';
-import SecondaryBackground from './SecondaryBackground';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     display: 'flex',
     flexDirection: 'column',
-    gap: theme.spacing(1),
-    padding: theme.spacing(5, 0),
+    gap: '32px',
+    padding: theme.spacing(8, 0),
     width: '100%',
-    zIndex: 1,
   },
   accordion: {
     width: '100%',
@@ -34,29 +33,48 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   summary: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.landing.palette.mutedSecondary,
+    color: theme.landing.palette.text,
     borderRadius: '8px',
     '&.Mui-expanded': {
       borderRadius: '8px 8px 0 0',
+      backgroundColor: theme.landing.palette.mutedPrimary,
     },
   },
   heading: {
-    fontSize: theme.typography.h6.fontSize,
-    fontWeight: theme.typography.fontWeightBold,
+    fontSize: '18px',
+    fontWeight: 700,
+    lineHeight: '24px',
   },
   details: {
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: theme.landing.palette.mutedPrimary,
     padding: theme.spacing(2),
     borderRadius: '0 0 8px 8px',
+    fontSize: '18px',
+    color: theme.landing.palette.text,
   },
   title: {
     textAlign: 'start',
-    marginBottom: theme.spacing(4),
     fontWeight: theme.typography.fontWeightBold,
+    color: theme.landing.palette.text,
+    fontSize: '40px',
   },
   expandIcon: {
-    color: 'white',
+    color: theme.landing.palette.text,
+  },
+  button: {
+    padding: '12px 23px',
+    fontWeight: 600,
+    borderRadius: '8px',
+    backgroundColor: theme.landing.palette.primary,
+    '&:hover': {
+      backgroundColor: theme.landing.palette.primary,
+    },
+  },
+  buttonWrapper: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
@@ -81,16 +99,20 @@ function FAQSection() {
       question: formatMessage('moldovaLanding.FAQSection.Q4'),
       answer: formatMessage('moldovaLanding.FAQSection.A4'),
     },
+    {
+      question: formatMessage('moldovaLanding.FAQSection.Q5'),
+      answer: formatMessage('moldovaLanding.FAQSection.A5'),
+    },
   ];
 
   return (
-    <SecondaryBackground>
-      <SiteContainer>
-        <div className={classes.wrapper}>
-          <Typography variant="h4" className={classes.title}>
-            {formatMessage('moldovaLanding.FAQSection.title')}
-          </Typography>
+    <SiteContainer>
+      <div className={classes.wrapper} id={REDIRECT.FAQ}>
+        <Typography variant="h4" className={classes.title}>
+          {formatMessage('moldovaLanding.FAQSection.title')}
+        </Typography>
 
+        <div>
           {FAQS.map((faq, index) => (
             <Accordion key={faq.question} className={classes.accordion}>
               <AccordionSummary
@@ -109,8 +131,18 @@ function FAQSection() {
             </Accordion>
           ))}
         </div>
-      </SiteContainer>
-    </SecondaryBackground>
+
+        <div className={classes.buttonWrapper}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            {formatMessage('moldovaLanding.FAQSection.buttonCta')}
+          </Button>
+        </div>
+      </div>
+    </SiteContainer>
   );
 }
 

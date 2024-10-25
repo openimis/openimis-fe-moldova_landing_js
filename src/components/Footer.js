@@ -1,10 +1,10 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+import { Link as LinkScroll } from 'react-scroll';
 
-import { IconButton, Link, Typography } from '@material-ui/core';
-import FacebookIcon from '@material-ui/icons/Facebook';
-import YouTubeIcon from '@material-ui/icons/YouTube';
+import { Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import {
@@ -12,107 +12,142 @@ import {
   useModulesManager,
   useTranslations,
 } from '@openimis/fe-core';
-import { LINKS, MODULE_NAME, PRIVACY_AND_TERMS_LINKS } from '../constants';
-import SecondaryBackground from './SecondaryBackground';
+import logo from '../assets/logo.png';
+import ministry1 from '../assets/ministry1.png';
+import ministry2 from '../assets/ministry2.png';
+import { FOOTER_LINKS, MODULE_NAME, SOCIAL_LINKS } from '../constants';
 import SiteContainer from './SiteContainer';
 
 const useStyles = makeStyles((theme) => ({
   section: {
     display: 'flex',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
+    flexDirection: 'column',
     gap: theme.spacing(4),
+    padding: theme.spacing(4),
     width: '100%',
-    zIndex: 1,
   },
   main: {
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'start',
-    alignItems: 'start',
-    maxWidth: '50%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: theme.spacing(4),
   },
-  links: {
+  rowLinks: {
     display: 'flex',
     flexDirection: 'row',
-    gap: theme.spacing(8),
-    padding: theme.spacing(2),
-  },
-  columnLinks: {
-    display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'start',
     alignItems: 'start',
     gap: theme.spacing(2),
   },
-  socials: {
+  link: {
+    color: '#898989',
+    fontSize: '18px',
+    lineHeight: '24px',
+    fontWeight: 500,
+    cursor: 'pointer',
+  },
+  socialsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: theme.spacing(6),
+  },
+  ministryLogos: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: theme.spacing(2),
+  },
+  socialButtonContainer: {
     display: 'flex',
     flexDirection: 'row',
     gap: theme.spacing(2),
+  },
+  socialButton: {
+    color: '#898989',
+    width: '24px',
+    height: '24px',
+  },
+  footer: {
+    borderTop: '1px solid #E0E0E0',
+  },
+  logo: {
+    width: '126px',
+    height: '49px',
+  },
+  ministryLogo: {
+    width: '118px',
+    height: '35px',
   },
 }));
 
-function Footer({ logo }) {
+function Footer() {
   const classes = useStyles();
   const history = useHistory();
   const modulesManager = useModulesManager();
   const { formatMessage } = useTranslations(MODULE_NAME, modulesManager);
 
   return (
-    <SecondaryBackground>
+    <div className={classes.footer}>
       <SiteContainer>
         <div className={classes.section}>
-          <div className={classes.main}>
-            <img
-              src={logo}
-              alt="Logo of Ministry"
-              style={{ width: '170px', height: '90px' }}
-            />
-            <div className={classes.socials}>
-              <IconButton color="primary" aria-label="Navigate to Facebook">
-                <FacebookIcon />
-              </IconButton>
-              <IconButton color="primary" aria-label="Navigate to Youtube">
-                <YouTubeIcon />
-              </IconButton>
-            </div>
-            <Typography
-              variant="caption"
-              color="primary"
-              style={{ padding: '8px 0' }}
-            >
-              {formatMessage('moldovaLanding.Footer.amendment')}
-            </Typography>
+          <div style={{ width: '100%' }}>
+            <img src={logo} alt="Logo of Ministry" className={classes.logo} />
           </div>
-          <div className={classes.links}>
-            <div className={classes.columnLinks}>
-              {LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  component="button"
-                  variant="body2"
-                  onClick={() => history.push(link.path)}
-                >
-                  {formatMessage(link.name)}
-                </Link>
-              ))}
+          <div className={classes.main}>
+            <div className={classes.links}>
+              <div className={classes.rowLinks}>
+                {FOOTER_LINKS.map((link) => (link.external ? (
+                  <Link
+                    key={link.name}
+                    component="button"
+                    className={classes.link}
+                    variant="body2"
+                    onClick={() => history.push(link.path)}
+                  >
+                    {formatMessage(link.name)}
+                  </Link>
+                ) : (
+                  <LinkScroll
+                    key={link.name}
+                    to={link.path}
+                    smooth
+                    duration={500}
+                    className={classes.link}
+                  >
+                    {formatMessage(link.name)}
+                  </LinkScroll>
+                )))}
+              </div>
             </div>
-            <div className={classes.columnLinks}>
-              {PRIVACY_AND_TERMS_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  component="button"
-                  variant="body2"
-                  onClick={() => history.push(link.path)}
-                >
-                  {formatMessage(link.name)}
-                </Link>
-              ))}
+            <div className={classes.socialsContainer}>
+              <div className={classes.ministryLogos}>
+                <img
+                  src={ministry1}
+                  alt="Logo of Ministry 1"
+                  className={classes.ministryLogo}
+                />
+                <img
+                  src={ministry2}
+                  alt="Logo of Ministry 2"
+                  className={classes.ministryLogo}
+                />
+              </div>
+              <div className={classes.socialButtonContainer}>
+                {SOCIAL_LINKS.map(({ name, url, icon: Icon }) => (
+                  <Link
+                    key={name}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon className={classes.socialButton} />
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </SiteContainer>
-    </SecondaryBackground>
+    </div>
   );
 }
 

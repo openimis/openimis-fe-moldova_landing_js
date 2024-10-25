@@ -13,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: theme.palette.primary.main,
-    opacity: 0.04,
+    backgroundColor: theme.landing.palette.mutedPrimary,
     zIndex: 0,
   },
 }));

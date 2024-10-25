@@ -1,10 +1,13 @@
 import React from 'react';
 
-import { Typography, Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
+import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/styles';
 
 import { useTranslations } from '@openimis/fe-core';
-import { MODULE_NAME } from '../constants';
+import call from '../assets/call.png';
+import map from '../assets/map.png';
+import { CONTACT_EMAIL, MODULE_NAME } from '../constants';
 import SiteContainer from './SiteContainer';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,55 +15,82 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: theme.spacing(2),
+    gap: '24px',
     padding: theme.spacing(8, 0),
     width: '100%',
   },
-  secondaryCard: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    flex: 1,
+  primaryCard: {
+    backgroundColor: theme.landing.palette.mutedPrimary,
+    borderRadius: '16px',
+    width: '100%',
+    height: '317px',
   },
-  secondaryBackground: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.primary.main,
-    opacity: 0.08,
-    zIndex: 0,
-    borderRadius: '8px',
+  secondaryCard: {
+    backgroundColor: theme.landing.palette.secondary,
+    borderRadius: '16px',
+    height: '317px',
+    width: '100%',
   },
   cardContent: {
-    zIndex: 1,
-    width: '100%',
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: '100%',
   },
   cardContentText: {
-    flex: 1,
-    padding: theme.spacing(2),
-    flexDirection: 'column',
     display: 'flex',
-    gap: theme.spacing(2),
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: theme.spacing(6),
+    color: theme.landing.palette.text,
   },
-  primaryCard: {
-    flex: 1,
-    backgroundColor: theme.palette.primary.main,
-    color: 'white',
+  contentTitle: {
+    fontSize: '24px',
+    fontWeight: 700,
+    lineHeight: '32px',
+  },
+  ctaButton: {
+    backgroundColor: theme.landing.palette.primary,
+    color: theme.landing.palette.white,
     borderRadius: '8px',
+    fontWeight: 600,
+    padding: '10px 24px',
+    '&:hover': {
+      backgroundColor: theme.landing.palette.primary,
+    },
   },
-  image: {
-    width: '100%',
-    height: 'auto',
-    maxWidth: '300px',
-    flex: 1,
-    borderRadius: '0 8px 8px 0',
+  cardContentImage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  primaryCardButton: {
-    color: theme.palette.primary.main,
+  iconColor: {
+    color: theme.landing.palette.primary,
+    height: '16px',
+    width: '16px',
+  },
+  emailWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '8px',
+    alignItems: 'center',
+    justifyContent: 'start',
+  },
+  iconWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '32px',
+    width: '32px',
+    borderRadius: '100px',
+    padding: '8px',
+    backgroundColor: theme.landing.palette.white,
+  },
+  email: {
+    color: theme.landing.palette.text,
+    fontSize: '18px',
+    fontWeight: 600,
+    lineHeight: '24px',
   },
 }));
 
@@ -71,65 +101,45 @@ function ProgramSummary() {
   return (
     <SiteContainer>
       <div className={classes.wrapper}>
-        <div className={classes.secondaryCard}>
-          <div className={classes.secondaryBackground} />
-          <div className={classes.cardContent}>
-            <div className={classes.cardContentText}>
-              <Typography variant="h5">
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.secondaryCardTitle',
-                )}
-              </Typography>
-              <Typography variant="body1" style={{ flex: 1 }}>
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.secondaryCardDescription',
-                )}
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ color: 'white' }}
-              >
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.secondaryCardButton',
-                )}
-              </Button>
-            </div>
-            <img
-              src="https://via.placeholder.com/300"
-              alt="Tips for Application"
-              className={classes.image}
-            />
-          </div>
-        </div>
         <div className={classes.primaryCard}>
           <div className={classes.cardContent}>
             <div className={classes.cardContentText}>
-              <Typography variant="h5">
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.primaryCardTitle',
-                )}
+              <Typography className={classes.contentTitle}>
+                {formatMessage('moldovaLanding.ProgramSummary.downloadGuide')}
               </Typography>
-              <Typography variant="body1" style={{ flex: 1 }}>
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.primaryCardDescription',
-                )}
-              </Typography>
-              <Button
-                variant="contained"
-                color="secondary"
-                className={classes.primaryCardButton}
-              >
-                {formatMessage(
-                  'moldovaLanding.ProgramSummary.primaryCardButton',
-                )}
-              </Button>
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.ctaButton}
+                >
+                  {formatMessage('moldovaLanding.ProgramSummary.buttonCta')}
+                </Button>
+              </div>
             </div>
-            <img
-              src="https://via.placeholder.com/300"
-              alt="Tips for Application"
-              className={classes.image}
-            />
+            <div className={classes.cardContentImage}>
+              <img src={map} alt="The person with a map" />
+            </div>
+          </div>
+        </div>
+        <div className={classes.secondaryCard}>
+          <div className={classes.cardContent}>
+            <div className={classes.cardContentText}>
+              <Typography className={classes.contentTitle}>
+                {formatMessage('moldovaLanding.ProgramSummary.contactUs')}
+              </Typography>
+              <div className={classes.emailWrapper}>
+                <div className={classes.iconWrapper}>
+                  <MailIcon className={classes.iconColor} />
+                </div>
+                <Typography className={classes.email}>
+                  {CONTACT_EMAIL}
+                </Typography>
+              </div>
+            </div>
+            <div className={classes.cardContentImage}>
+              <img src={call} alt="The person calling" />
+            </div>
           </div>
         </div>
       </div>

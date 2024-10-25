@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    maxWidth: '1300px',
+    maxWidth: '1440px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',

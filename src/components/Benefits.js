@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import { useTranslations } from '@openimis/fe-core';
-import { MODULE_NAME } from '../constants';
+import { MODULE_NAME, REDIRECT } from '../constants';
 import SiteContainer from './SiteContainer';
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: theme.spacing(1),
-    padding: theme.spacing(5, 0),
+    padding: theme.spacing(8, 0),
     width: '100%',
   },
   section: {
@@ -23,22 +23,23 @@ const useStyles = makeStyles((theme) => ({
   },
   primarySquare: {
     flex: 1,
-    backgroundColor: theme.palette.primary.main,
-    color: 'white',
+    backgroundColor: theme.landing.palette.primary,
+    color: theme.landing.palette.white,
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding: theme.spacing(4),
+    padding: theme.spacing(6),
   },
   secondarySquare: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: theme.landing.palette.secondary,
+    color: theme.landing.palette.text,
     borderRadius: '16px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    padding: theme.spacing(4),
+    padding: theme.spacing(6),
     position: 'relative',
   },
   secondaryBackground: {
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     opacity: 0.08,
     zIndex: 0,
-    borderRadius: '8px',
+    borderRadius: '16px',
   },
   squareContent: {
     zIndex: 1,
@@ -68,93 +69,77 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     flex: 1,
   },
-  image: {
-    width: '100%',
-    maxWidth: '300px',
-    borderRadius: '16px',
-    marginBottom: theme.spacing(2),
-    alignSelf: 'center',
-  },
-  button: {
-    marginTop: theme.spacing(2),
-    width: '100%',
-    color: theme.palette.primary.main,
-    padding: theme.spacing(1.25),
-  },
   sectionTitle: {
     textAlign: 'start',
+    color: theme.landing.palette.text,
     zIndex: 1,
     marginBottom: theme.spacing(4),
     fontWeight: theme.typography.fontWeightBold,
+    fontSize: '40px',
   },
 }));
 
-function HowToApplySection() {
+const PRIMARY_POINTS = [
+  'moldovaLanding.HowToApplySection.primarySquarePoint1',
+  'moldovaLanding.HowToApplySection.primarySquarePoint2',
+  'moldovaLanding.HowToApplySection.primarySquarePoint3',
+  'moldovaLanding.HowToApplySection.primarySquarePoint4',
+];
+
+const SECONDARY_POINTS = [
+  'moldovaLanding.HowToApplySection.secondarySquarePoint1',
+  'moldovaLanding.HowToApplySection.secondarySquarePoint2',
+  'moldovaLanding.HowToApplySection.secondarySquarePoint3',
+  'moldovaLanding.HowToApplySection.secondarySquarePoint4',
+];
+
+function Benefits() {
   const classes = useStyles();
   const { formatMessage } = useTranslations(MODULE_NAME);
 
   return (
     <SiteContainer>
-      <div className={classes.wrapper}>
-        <Typography variant="h4" className={classes.sectionTitle}>
+      <div className={classes.wrapper} id={REDIRECT.CHECK_THE_VOUCHER}>
+        <Typography className={classes.sectionTitle}>
           {formatMessage('moldovaLanding.HowToApplySection.title')}
         </Typography>
         <div className={classes.section}>
           <div className={classes.primarySquare}>
-            <img
-              src="https://via.placeholder.com/300"
-              alt="Application Process"
-              className={classes.image}
-            />
             <Typography variant="h5" className={classes.title}>
               {formatMessage(
                 'moldovaLanding.HowToApplySection.primarySquareTitle',
               )}
             </Typography>
-            <Typography variant="subtitle1" className={classes.description}>
-              {formatMessage(
-                'moldovaLanding.HowToApplySection.primarySquareDescription',
-              )}
-            </Typography>
-            <Button
-              variant="contained"
-              color="secondary"
-              className={classes.button}
-            >
-              {formatMessage(
-                'moldovaLanding.HowToApplySection.primarySquareButtonLabel',
-              )}
-            </Button>
+            <ul>
+              {PRIMARY_POINTS.map((point, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <li key={index}>
+                  <Typography variant="body1" className={classes.description}>
+                    {formatMessage(point)}
+                  </Typography>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className={classes.secondarySquare}>
             <div className={classes.secondaryBackground} />
             <div className={classes.squareContent}>
-              <img
-                src="https://via.placeholder.com/300"
-                alt="Tips for Application"
-                className={classes.image}
-              />
               <Typography variant="h5" className={classes.title}>
                 {formatMessage(
                   'moldovaLanding.HowToApplySection.secondarySquareTitle',
                 )}
               </Typography>
-              <Typography variant="subtitle1" className={classes.description}>
-                {formatMessage(
-                  'moldovaLanding.HowToApplySection.secondarySquareDescription',
-                )}
-              </Typography>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.button}
-                style={{ color: 'white' }}
-              >
-                {formatMessage(
-                  'moldovaLanding.HowToApplySection.secondarySquareButtonLabel',
-                )}
-              </Button>
+              <ul>
+                {SECONDARY_POINTS.map((point, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <li key={index}>
+                    <Typography variant="body1" className={classes.description}>
+                      {formatMessage(point)}
+                    </Typography>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -163,4 +148,4 @@ function HowToApplySection() {
   );
 }
 
-export default HowToApplySection;
+export default Benefits;
