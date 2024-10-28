@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
+
 import { AppBar, Link, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+
 import {
   useHistory,
   useModulesManager,
@@ -11,6 +13,7 @@ import group from '../assets/group.png';
 import login from '../assets/login.png';
 import { MODULE_NAME, ROUTES } from '../constants';
 import SiteContainer from './SiteContainer';
+import PublicPageLangSwitch from './PublicPageLangSwitch';
 
 const useStyles = makeStyles((theme) => ({
   backgroundColor: {
@@ -22,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '8px',
-    height: '100%',
+    height: '32px',
   },
   logo: {
     height: '24px',
@@ -45,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
   loginText: {
     fontWeight: 600,
     fontSize: '14px',
+  },
+  actions: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '24px',
   },
 }));
 
@@ -71,17 +79,20 @@ function SiteBanner() {
             {formatMessage('SiteBanner')}
           </Typography>
         </div>
-        <Link
-          component="button"
-          variant="body2"
-          onClick={() => history.push(ROUTES.LOGIN)}
-          className={classes.loginLink}
-        >
-          <img src={login} alt="Login Icon" className={classes.loginIcon} />
-          <span className={classes.loginText}>
-            {formatMessage('LoginButtonLabel')}
-          </span>
-        </Link>
+        <div className={classes.actions}>
+          <PublicPageLangSwitch />
+          <Link
+            component="button"
+            variant="body2"
+            onClick={() => history.push(ROUTES.LOGIN)}
+            className={classes.loginLink}
+          >
+            <img src={login} alt="Login Icon" className={classes.loginIcon} />
+            <span className={classes.loginText}>
+              {formatMessage('LoginButtonLabel')}
+            </span>
+          </Link>
+        </div>
       </SiteContainer>
     </AppBar>
   );

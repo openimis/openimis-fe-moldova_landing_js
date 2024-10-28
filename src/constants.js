@@ -49,3 +49,11 @@ export const SOCIAL_LINKS = [
     icon: YouTubeIcon,
   },
 ];
+
+// If you want to use additional languages, you can add them to the array.
+// They are not fetched from the API, so you need to add them manually.
+export const AVAILABLE_LANGUAGES = [
+  { name: 'English', code: 'en' },
+  { name: 'Română', code: 'ro' },
+  { name: 'Русский', code: 'ru' },
+];
