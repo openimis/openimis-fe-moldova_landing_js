@@ -34,8 +34,9 @@ export default {
   ],
   plugins: [
     url({
-      include: ['**/*.png', '**/*.jpg', '**/*.gif', '**/*.svg'],
+      include: ['**/*.png', '**/*.jpg', '**/*.gif', '**/*.svg', '**/*.pdf'],
       limit: 10 * 1024 * 1024,
+      fileName: 'assets/[name][extname]',
     }),
     json(),
     babel({

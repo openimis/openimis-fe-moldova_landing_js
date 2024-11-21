@@ -1,12 +1,12 @@
 import FacebookIcon from '@material-ui/icons/Facebook';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import YouTubeIcon from '@material-ui/icons/YouTube';
+// import LinkedInIcon from '@material-ui/icons/LinkedIn';
+// import YouTubeIcon from '@material-ui/icons/YouTube';
 
 export const MODULE_NAME = 'moldovaLanding';
 
 export const ROUTES = {
   LANDING: '/',
-  TERMS_AND_CONDITIONS: '/terms-and-conditions',
+  TERMS_AND_CONDITIONS: '/voucher/gdpr',
   LOGIN: '/login',
 };
 
@@ -32,23 +32,28 @@ export const FOOTER_LINKS = [
 
 export const CONTACT_EMAIL = 'secretariat@social.gov.md';
 
+export const DOWNLOAD_GUIDE_FILE_NAME = 'ghid_de_instrucțiuni.pdf';
+
 export const SOCIAL_LINKS = [
   {
     name: 'Facebook',
-    url: 'https://facebook.com',
+    url: 'https://www.facebook.com/social.gov.md',
     icon: FacebookIcon,
   },
-  {
-    name: 'LinkedIn',
-    url: 'https://linkedin.com',
-    icon: LinkedInIcon,
-  },
-  {
-    name: 'YouTube',
-    url: 'https://youtube.com',
-    icon: YouTubeIcon,
-  },
+  // NOTE: LinkedIn and YouTube will be added at a later time
+  // {
+  //   name: 'LinkedIn',
+  //   url: 'https://linkedin.com',
+  //   icon: LinkedInIcon,
+  // },
+  // {
+  //   name: 'YouTube',
+  //   url: 'https://youtube.com',
+  //   icon: YouTubeIcon,
+  // },
 ];
+
+export const YOUTUBE_PLAYLIST_HREF = 'https://www.youtube.com/';
 
 // If you want to use additional languages, you can add them to the array.
 // They are not fetched from the API, so you need to add them manually.

@@ -6,8 +6,11 @@ import { makeStyles } from '@material-ui/styles';
 import { useTranslations, useHistory } from '@openimis/fe-core';
 import bar from '../assets/bar.png';
 import hero from '../assets/hero.png';
-import { CONTACT_EMAIL, MODULE_NAME, ROUTES } from '../constants';
+import {
+  CONTACT_EMAIL, DOWNLOAD_GUIDE_FILE_NAME, MODULE_NAME, ROUTES,
+} from '../constants';
 import SiteContainer from './SiteContainer';
+import guide from '../assets/guide.pdf';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -135,9 +138,9 @@ function HeroSection() {
           <Typography variant="subtitle1" className={classes.barText}>
             {formatMessageWithValues('moldovaLanding.HeroSection.barText', {
               boldText: (
-                <span className={classes.boldBarText}>
+                <a className={classes.boldBarText} href={guide} download={DOWNLOAD_GUIDE_FILE_NAME}>
                   {formatMessage('moldovaLanding.HeroSection.boldText')}
-                </span>
+                </a>
               ),
               email: CONTACT_EMAIL,
             })}

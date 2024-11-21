@@ -4,7 +4,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Button,
   Typography,
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -71,11 +70,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.landing.palette.primary,
     },
   },
-  buttonWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 }));
 
 function FAQSection() {
@@ -130,16 +124,6 @@ function FAQSection() {
               </AccordionDetails>
             </Accordion>
           ))}
-        </div>
-
-        <div className={classes.buttonWrapper}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-          >
-            {formatMessage('moldovaLanding.FAQSection.buttonCta')}
-          </Button>
         </div>
       </div>
     </SiteContainer>

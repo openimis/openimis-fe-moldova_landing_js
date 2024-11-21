@@ -4,8 +4,9 @@ import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 import { useTranslations } from '@openimis/fe-core';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import video from '../assets/video.png';
-import { MODULE_NAME, REDIRECT } from '../constants';
+import { MODULE_NAME, REDIRECT, YOUTUBE_PLAYLIST_HREF } from '../constants';
 import SecondaryBackground from './SecondaryBackground';
 import SiteContainer from './SiteContainer';
 
@@ -39,11 +40,49 @@ const useStyles = makeStyles((theme) => ({
   description: {
     textAlign: 'left',
   },
+  videoWrapper: {
+    position: 'relative',
+  },
+  playerWrapper: {
+    position: 'absolute',
+    bottom: theme.spacing(4),
+    left: theme.spacing(4),
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: theme.spacing(2),
+  },
+  player: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '64px',
+    height: '64px',
+    borderRadius: '50%',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    color: theme.landing.palette.text,
+    textDecoration: 'none',
+  },
+  playerText: {
+    color: theme.landing.palette.white,
+    fontWeight: 500,
+    fontSize: '24px',
+  },
+  blurredBg: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(59, 105, 0, 0.6)',
+    borderRadius: '16px',
+  },
   video: {
     borderRadius: '16px',
     alignSelf: 'center',
-    width: '588px',
-    height: '330px',
+    width: '100%',
+    height: '100%',
   },
   aboutList: {
     display: 'flex',
@@ -87,11 +126,27 @@ function AboutTheProgram() {
         <div className={classes.wrapper} id={REDIRECT.ABOUT_THE_PROGRAM}>
           <div className={classes.section}>
             <div className={classes.sectionWrapper}>
-              <img
-                src={video}
-                alt="About the program video"
-                className={classes.video}
-              />
+              <div className={classes.videoWrapper}>
+                <div className={classes.blurredBg} />
+                <img
+                  src={video}
+                  alt="About the program video"
+                  className={classes.video}
+                />
+                <div className={classes.playerWrapper}>
+                  <a
+                    className={classes.player}
+                    href={YOUTUBE_PLAYLIST_HREF}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <PlayArrowIcon fontSize="large" />
+                  </a>
+                  <p className={classes.playerText}>
+                    {formatMessage('AboutTheProgram.playlist')}
+                  </p>
+                </div>
+              </div>
             </div>
             <div className={classes.sectionWrapper}>
               <Typography variant="h4" className={classes.sectionTitle}>
