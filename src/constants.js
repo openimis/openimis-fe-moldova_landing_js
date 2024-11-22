@@ -27,7 +27,11 @@ export const LINKS = [
 export const FOOTER_LINKS = [
   { name: 'Route.aboutThePlatform', path: REDIRECT.ABOUT_THE_PLATFORM },
   { name: 'Route.FAQ', path: REDIRECT.FAQ },
-  { name: 'Route.termsAndConditions', path: ROUTES.TERMS_AND_CONDITIONS, external: true },
+  {
+    name: 'Route.termsAndConditions',
+    path: ROUTES.TERMS_AND_CONDITIONS,
+    external: true,
+  },
 ];
 
 export const CONTACT_EMAIL = 'secretariat@social.gov.md';
@@ -53,7 +57,8 @@ export const SOCIAL_LINKS = [
   // },
 ];
 
-export const YOUTUBE_PLAYLIST_HREF = 'https://www.youtube.com/';
+// eslint-disable-next-line max-len
+export const YOUTUBE_PLAYLIST_HREF = 'https://www.youtube.com/playlist?list=PLa54E5Uf3L8NqQhl4MP6k2K_ionc48JZe&jct=47Fq3kXlUSy2Vx7csklh0w';
 
 // If you want to use additional languages, you can add them to the array.
 // They are not fetched from the API, so you need to add them manually.

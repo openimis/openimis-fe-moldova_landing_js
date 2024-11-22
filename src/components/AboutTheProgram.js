@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
     color: theme.landing.palette.text,
     textDecoration: 'none',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.6)',
+      transition: 'background-color 0.3s',
+    },
   },
   playerText: {
     color: theme.landing.palette.white,
